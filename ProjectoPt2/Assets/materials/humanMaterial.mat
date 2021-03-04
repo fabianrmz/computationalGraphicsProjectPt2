@@ -71,13 +71,13 @@ Material:
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
-    - _Offset: 0
+    - _Offset: 3.6
     - _Parallax: 0.02
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
-    - _Velocidad: 0
+    - _Velocidad: 2.78
     - _ZWrite: 1
     m_Colors:
     - _Ambientecito: {r: 0.38216448, g: 0.42324784, b: 0.7169812, a: 1}

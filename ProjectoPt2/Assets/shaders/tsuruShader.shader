@@ -108,7 +108,7 @@
             // Difuso : kd (L . N) id
             // L - vector que va en dirección de la luz
             float3 l = normalize(_WorldSpaceLightPos0.xyz * -1);
-            float3 l2 = normalize(_WorldSpaceLightPos0.xyz);
+
 
             // N - vector normal
             // la multiplicación es de un vector (normal) por una matriz
@@ -121,7 +121,7 @@
             // dot() - método para producto punto
             // resultado puede ser negativo
             // max() - te da el valor máximo entre 2 parámetros (hint: uno es cero)
-            float productito = max(0.0, dot(-l, n3));
+            float productito = max(0.0, dot(-l, n2));
 
             float4 difuso = float4(0, 0, 0, 0);
             difuso = _Difusito * productito * lColor;
@@ -132,7 +132,7 @@
             float4 especular = float4(0, 0, 0, 0);
 
             float3 v = vParam;
-            float3 r = reflect(-l, n3);
+            float3 r = reflect(-l, n2);
             float productote = max(0.0, dot(v, r));
 
             especular = _Especularcito * pow(productote, _Brillito) * lColor;
@@ -148,7 +148,6 @@
 
             float4 l1 = phong(_ColorLuz, input.normal, input.tex, input.v);
 
-            // blending - mezcla de colores
             return l1;
             
         }

@@ -20,7 +20,6 @@
         #include "UnityCG.cginc"
 
         fixed4 _Color;
-        uniform sampler2d _Textura;
         uniform float _Velocidad;
         uniform float _Offset;
 

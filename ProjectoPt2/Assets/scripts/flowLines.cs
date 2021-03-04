@@ -4,46 +4,55 @@ using UnityEngine;
 
 public class flowLines : MonoBehaviour
 {
-    public Color baseColor;
-    public Material material;
 
-    public Transform origin;
-    public Vector3[] points;
+    public Material mat;
+    public Transform reference;
 
-    public Vector3[] pointsOrigin;
-    public Color[] colors;
+    public float iterations = 90;
+
+
 
     void OnPostRender()
     {
-        RenderLines(points, colors);
+        RenderLines(reference.position);
     }
-
     void OnDrawGizmos()
     {
-        RenderLines(points, colors);
+        
+        RenderLines(reference.position);
     }
 
-    void RenderLines(Vector3[] points, Color[] colors)
+    void RenderLines(Vector3 origin)
     {
-        if (!ValidateInput(points, colors))
+        if (!mat)
         {
+            Debug.LogError("Please Assign a material on the inspector");
             return;
         }
+        GL.PushMatrix();
+        mat.SetPass(0);
+        Vector3 variablePoints = origin;
 
         GL.Begin(GL.LINES);
-        material.SetPass(0);
-        for (int i = 0; i < points.Length; i++)
-        {
-            GL.Color(baseColor);
-            GL.Vertex(pointsOrigin[i]);
+        float a = 0f;
+        for(int i=0;i<iterations;i++){
             GL.Color(Color.green);
-            GL.Vertex(points[i]);
+            GL.Vertex(origin); 
+
+            float x = (2*Mathf.Cos(a)) +origin.x;
+            float y = (2*Mathf.Sin(a)) +origin.y;
+            variablePoints.x=x;
+            variablePoints.y=y;
+            a+=0.4f;
+
+            GL.Color(Color.red);
+            GL.Vertex(variablePoints); //end
+
+
         }
         GL.End();
+        GL.PopMatrix();
     }
 
-    private bool ValidateInput(Vector3[] points, Color[] colors)
-    {
-        return points != null && colors != null && points.Length == colors.Length;
-    }
+   
 }
